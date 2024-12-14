@@ -50,7 +50,8 @@ clean_monash <- function(x) {
       }
     })
 
-  x <- cbind(x, salary_detail)
+  x <- cbind(x, salary_detail) |>
+    tibble::as_tibble()
 
   return(x)
 }
