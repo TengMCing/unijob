@@ -15,7 +15,7 @@ unimelb <- function() {
   position_salary <- rvest::html_elements(page, "tr td:nth-child(2)") |>
     rvest::html_text2()
 
-  position_close <- rvest::html_elements(page, "span.close-date time") |>
+  position_close <- rvest::html_elements(page, "tr td:nth-child(3)") |>
     rvest::html_text2()
 
   tibble::tibble(access_date = Sys.Date(),
@@ -30,7 +30,7 @@ unimelb <- function() {
 }
 
 clean_unimelb <- function(x) {
-  x$close_date <- as.Date(x$close_date,
+  x$close_date <- as.Date(gsub(".* (\\d{1,2} \\w{3} \\d{4}) .*", "\\1", x$close_date),
                           tryFormats = c("%e %b %Y"))
 
   salary_detail <- regmatches(x$salary, gregexpr("(\\$[0-9,]+)", x$salary)) |>
