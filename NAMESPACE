@@ -3,3 +3,4 @@
 export(monash)
 export(unimelb)
 export(unsw)
+export(usyd)
